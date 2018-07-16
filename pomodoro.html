@@ -6,8 +6,7 @@
     <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/range.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <script src="assets/js/moment.js"></script>
-    <script src="assets/js/script.js"></script>
+
 </head>
 
 <body>
@@ -29,16 +28,19 @@
         <form>
             <h2>Work</h2>
             <label for="main-input" id="main-label">30</label>
-            <input class='main__slider' type="range" min="1" max="50" id='main-input' step="1" value="30" />
+            <input class='main__slider' type="range" min="1" max="60" id='main-input' step="1" value="30" />
         </form>
         <form>
             <h2>Rest</h2>
-            <label for="rest-input" id='rest-label'>5</label>
-            <input type="range" min="1" max="25" id='rest-input' step="1" value="5" />
+            <label for="rest-input" id='rest-label'>12</label>
+            <input class="main__slider" type="range" min="1" max="25" id='rest-input' step="1" value="12" />
         </form>
         <button id="start-btn">Start</button>
     </main>
     <footer> About who created this file. You know who.</footer>
+
+    <script src="assets/js/moment.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>

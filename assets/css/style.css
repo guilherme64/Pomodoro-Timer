@@ -39,7 +39,7 @@ body {
 }
 
 .main__bar--green {
-    width: 50%;
+    width: 100%;
     background-color: #00ff8a;
     height: 50px;
 }

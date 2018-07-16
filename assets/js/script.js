@@ -5,8 +5,14 @@ window.addEventListener('DOMContentLoaded', function() {
     var restRangeInput = document.getElementById('rest-input');
     var mainTimer;
     var restTimer;
-    var m;
+    var remainingTime;
+    var remainingTimeBar = document.getElementById('bar-green');
     var timerType = 'p';
+
+
+    var ruleOfThree = function(maxValue, curValue) {
+        return (100 * curValue) / (maxValue * 3600 * 1000);
+    }
 
     startBtn.addEventListener('click', function startTimer() {
         //mainTimer = moment.duration(parseInt(mainRangeInput.value), 'minutes');
@@ -15,8 +21,8 @@ window.addEventListener('DOMContentLoaded', function() {
         restTimer = parseInt(restRangeInput.value);
         //restTimer = moment.duration(parseInt(restRangeInput.value), 'minutes');
         //restTimer.add(1, 'seconds');
-        m = moment.duration(mainTimer, 'm');
-        m.add(1, 's');
+        remainingTime = moment.duration(mainTimer, 'm');
+        remainingTime.add(1, 's');
 
 
     });
@@ -37,22 +43,24 @@ window.addEventListener('DOMContentLoaded', function() {
     setInterval(function() {
         //console.log(m > 0);
         if (timerType === 'p') {
-            m.subtract(1, 's');
-            timer.innerHTML = m.get('minutes') + ':' + m.get('seconds');
-            if (m.get('minutes') === 0 && m.get('seconds') === 0) {
+            remainingTime.subtract(1, 's');
+            timer.innerHTML = remainingTime.get('minutes') + ':' + remainingTime.get('seconds');
+            remainingTimeBar.style.width = ruleOfThree(mainTimer, remainingTime);
+            console.log(mainTimer * 3600 * 1000 + ' ' + remainingTime);
+            if (remainingTime.get('minutes') === 0 && remainingTime.get('seconds') === 0) {
                 console.log('Acabouz o principal');
-                console.log(m === 0);
+                console.log(remainingTime === 0);
                 alert('Cabou o tempo');
                 timerType = 'r';
                 //mainTimer.stop();
             }
         } else if (timerType === 'r') {
-            m.subtract(1, 's');
-            m = moment.duration(restTimer, 'minutes');
-            timer.innerHTML = m.get('minutes') + ':' + m.get('seconds');
-            if (m.get('minutes') === 0 && m.get('seconds') === 0) {
+            remainingTime.subtract(1, 's');
+            remainingTime = moment.duration(restTimer, 'minutes');
+            timer.innerHTML = remainingTime.get('minutes') + ':' + remainingTime.get('seconds');
+            if (remainingTime.get('minutes') === 0 && remainingTime.get('seconds') === 0) {
                 console.log('Acabouz o descanso');
-                console.log(m === 0);
+                console.log(remainingTime === 0);
                 alert('Cabou o tempo');
                 //timerType = 'p';
                 //mainTimer.stop();
