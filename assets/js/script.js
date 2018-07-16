@@ -11,7 +11,8 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
     var ruleOfThree = function(maxValue, curValue) {
-        return (100 * curValue) / (maxValue * 3600 * 1000);
+        console.log((100 * curValue) / (maxValue * 60 * 1000));
+        return (100 * curValue) / (maxValue * 60 * 1000);
     }
 
     startBtn.addEventListener('click', function startTimer() {
@@ -45,8 +46,8 @@ window.addEventListener('DOMContentLoaded', function() {
         if (timerType === 'p') {
             remainingTime.subtract(1, 's');
             timer.innerHTML = remainingTime.get('minutes') + ':' + remainingTime.get('seconds');
-            remainingTimeBar.style.width = ruleOfThree(mainTimer, remainingTime);
-            console.log(mainTimer * 3600 * 1000 + ' ' + remainingTime);
+            remainingTimeBar.style.width = ruleOfThree(mainTimer, remainingTime) + '%';
+            console.log(mainTimer * 60 * 1000 + ' ' + remainingTime);
             if (remainingTime.get('minutes') === 0 && remainingTime.get('seconds') === 0) {
                 console.log('Acabouz o principal');
                 console.log(remainingTime === 0);
