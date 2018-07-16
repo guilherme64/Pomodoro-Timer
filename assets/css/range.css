@@ -1,0 +1,98 @@
+/* FROM range.css */
+
+input[type=range].main__slider {
+    -webkit-appearance: none;
+    width: 100%;
+    margin: -0.5px 0;
+}
+
+input[type=range].main__slider:focus {
+    outline: none;
+}
+
+input[type=range].main__slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 32px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: rgba(255, 255, 255, 0.53);
+    border-radius: 0px;
+    border: 0px solid #010101;
+}
+
+input[type=range].main__slider::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px rgba(0, 0, 62, 0.67), 0px 0px 0px rgba(0, 0, 88, 0.67);
+    border: 0px solid rgba(0, 0, 0, 0);
+    height: 31px;
+    width: 17px;
+    border-radius: 0px;
+    background: #00ff8a;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: 0.5px;
+}
+
+input[type=range].main__slider:focus::-webkit-slider-runnable-track {
+    background: rgba(255, 255, 255, 0.53);
+}
+
+input[type=range].main__slider::-moz-range-track {
+    width: 100%;
+    height: 32px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: rgba(255, 255, 255, 0.53);
+    border-radius: 0px;
+    border: 0px solid #010101;
+}
+
+input[type=range].main__slider::-moz-range-thumb {
+    box-shadow: 0px 0px 0px rgba(0, 0, 62, 0.67), 0px 0px 0px rgba(0, 0, 88, 0.67);
+    border: 0px solid rgba(0, 0, 0, 0);
+    height: 31px;
+    width: 17px;
+    border-radius: 0px;
+    background: #00ff8a;
+    cursor: pointer;
+}
+
+input[type=range].main__slider::-ms-track {
+    width: 100%;
+    height: 32px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+input[type=range].main__slider::-ms-fill-lower {
+    background: rgba(242, 242, 242, 0.53);
+    border: 0px solid #010101;
+    border-radius: 0px;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+
+input[type=range].main__slider::-ms-fill-upper {
+    background: rgba(255, 255, 255, 0.53);
+    border: 0px solid #010101;
+    border-radius: 0px;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+
+input[type=range].main__slider::-ms-thumb {
+    box-shadow: 0px 0px 0px rgba(0, 0, 62, 0.67), 0px 0px 0px rgba(0, 0, 88, 0.67);
+    border: 0px solid rgba(0, 0, 0, 0);
+    width: 17px;
+    border-radius: 0px;
+    background: #00ff8a;
+    cursor: pointer;
+    height: 31px;
+}
+
+input[type=range].main__slider:focus::-ms-fill-lower {
+    background: rgba(255, 255, 255, 0.53);
+}
+
+input[type=range].main__slider:focus::-ms-fill-upper {
+    background: rgba(255, 255, 255, 0.53);
+}

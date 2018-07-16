@@ -1,0 +1,50 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.nav {
+    margin-top: 0px;
+    padding: 0px;
+    background-color: #f46464;
+    height: 3em;
+}
+
+.nav__title {
+    font-family: 'Work Sans', sans-serif;
+    color: white;
+    font-size: 2em;
+    text-align: center;
+}
+
+.main {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 1.5em;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.main__text {
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.main__timer {
+    display: block;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: -50px;
+}
+
+.main__bar--green {
+    width: 50%;
+    background-color: #00ff8a;
+    height: 50px;
+}
+
+.main__bar--red {
+    width: 100%;
+    background-color: #f46464;
+}
