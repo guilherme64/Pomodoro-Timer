@@ -1,18 +1,16 @@
 window.addEventListener('DOMContentLoaded', function() {
     function Pomodoro(workTime, restTime) {
 
-        this.workTime = parseInt(workTime);
-        this.restTime = parseInt(restTime);
-        this.Timer = moment.duration(30, 's');
+        this.workTime = workTime;
+        this.restTime = restTime;
+        this.Timer = moment.duration();
         //1o pro trabalho, segundo pro descanso.
         this.timerRounds = 2;
         this.start = false;
 
         this.setTimer = function(time) {
-            if (pomodoro.set === false) {
-                pomodoro.Timer.add(time, 'm');
-            }
-            return this.Timer.add(time, 'm');
+            this.start = true;
+            return this.Timer.add(parseInt(time), 'minutes');
         }
 
         this.getMinutes = function() {
@@ -33,18 +31,19 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
     function Update(pomodoro) {
-        //console.log('not updating' + pomodoro.Timer + 'timer he');
-        if (pomodoro.Timer > 0 && pomodoro.timerRounds > 0 && pomodoro.set === true) {
+        console.log('not updating' + pomodoro.Timer + 'timer he');
+        if (pomodoro.Timer > 0 && pomodoro.timerRounds > 0 && pomodoro.start === true) {
+            console.log('up');
             pomodoro.Timer.subtract(1, 's');
             timer.innerHTML = pomodoro.getMinutes() + ':' + pomodoro.getSeconds();
             remainingTimeBar.style.width = pomodoro.ruleOfThree((pomodoro.timerRounds === 2 ? pomodoro.workTime : pomodoro.restTime), pomodoro.Timer) + '%';
             if (pomodoro.Timer === 0) {
                 alert('Acabou o tempo');
-                pomodoro.setTimer(restTime);
+                pomodoro.setTimer(pomodoro.restTime);
                 pomodoro.timerRounds--;
             }
         } else {
-            pomodoro.set = false;
+            pomodoro.start = false;
         }
     }
 
@@ -57,10 +56,12 @@ window.addEventListener('DOMContentLoaded', function() {
     var pomodoro = new Pomodoro(workInput.value, restInput.value);
 
     startBtn.addEventListener('click', function() {
-        if (pomodoro.set === false) {
+        if (pomodoro.start === false) {
             pomodoro.workTime = workInput.value;
             pomodoro.restTime = restInput.value;
             pomodoro.setTimer(pomodoro.workTime);
+            console.log(pomodoro.workTime);
+            console.log(pomodoro.restTime);
             console.log(pomodoro.Timer + 'pomo');
         }
     });
