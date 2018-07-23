@@ -1,72 +1,83 @@
 window.addEventListener('DOMContentLoaded', function() {
-    var startBtn = document.getElementById('start-btn');
-    var timer = document.getElementById('timer');
-    var mainRangeInput = document.getElementById('main-input');
-    var restRangeInput = document.getElementById('rest-input');
-    var mainTimer;
-    var restTimer;
-    var remainingTime;
-    var remainingTimeBar = document.getElementById('bar-green');
-    var timerType = 'p';
+    function Pomodoro(workTime, restTime) {
 
+        this.workTime = parseInt(workTime);
+        this.restTime = parseInt(restTime);
+        this.Timer = moment.duration(30, 's');
+        //1o pro trabalho, segundo pro descanso.
+        this.timerRounds = 2;
+        this.set = false;
 
-    var ruleOfThree = function(maxValue, curValue) {
-        console.log((100 * curValue) / (maxValue * 60 * 1000));
-        return (100 * curValue) / (maxValue * 60 * 1000);
+        this.getMinutes = function() {
+            console.log(this.Timer);
+            return this.Timer.get('minutes');
+        }
+
+        this.getSeconds = function() {
+            console.log(this.Timer);
+            return this.Timer.get('seconds');
+        }
+
+        this.ruleOfThree = function(maxValue, curValue) {
+            return (100 * curValue) / (maxValue * 60 * 1000);
+        }
+
     }
 
-    startBtn.addEventListener('click', function startTimer() {
-        //mainTimer = moment.duration(parseInt(mainRangeInput.value), 'minutes');
-        //mainTimer.add(1, 'seconds');
-        mainTimer = parseInt(mainRangeInput.value);
-        restTimer = parseInt(restRangeInput.value);
-        //restTimer = moment.duration(parseInt(restRangeInput.value), 'minutes');
-        //restTimer.add(1, 'seconds');
-        remainingTime = moment.duration(mainTimer, 'm');
-        remainingTime.add(1, 's');
+    function setTimer(pomodoro, time) {
+        if (pomodoro.set === false) {
+            pomodoro.Timer.add(time, 'm');
+        }
+        return this.Timer.add(time, 'm');
+    }
 
+    function Update(pomodoro) {
+        //console.log('not updating' + pomodoro.Timer + 'timer he');
+        if (pomodoro.Timer > 0 && pomodoro.timerRounds > 0 && pomodoro.set === true) {
+            pomodoro.Timer.subtract(1, 's');
+            timer.innerHTML = pomodoro.getMinutes() + ':' + pomodoro.getSeconds();
+            remainingTimeBar.style.width = pomodoro.ruleOfThree((pomodoro.timerRounds === 2 ? pomodoro.workTime : pomodoro.restTime), pomodoro.Timer) + '%';
+            if (pomodoro.Timer === 0) {
+                alert('Acabou o tempo');
+                pomodoro.setTimer(restTime);
+                pomodoro.timerRounds--;
+            }
+        } else {
+            pomodoro.set = false;
+        }
+    }
 
-    });
+    var startBtn = document.getElementById('start-btn');
+    var timer = document.getElementById('timer');
+    var workInput = document.getElementById('main-input');
+    var restInput = document.getElementById('rest-input');
+    var remainingTimeBar = document.getElementById('bar-green');
 
-    mainRangeInput.addEventListener('input', function showValue() {
-        var mainLabel = document.getElementById('main-label');
-        mainLabel.innerHTML = mainRangeInput.value;
-        if (!mainTimer) {
-            timer.innerHTML = mainRangeInput.value;
+    var pomodoro = new Pomodoro(workInput.value, restInput.value);
+
+    startBtn.addEventListener('click', function() {
+        if (pomodoro.set === false) {
+            pomodoro.workTime = workInput.value;
+            pomodoro.restTime = restInput.value;
+            pomodoro.setTimer(pomodoro.workTime);
+            console.log(pomodoro.Timer + 'pomo');
         }
     });
 
-    restRangeInput.addEventListener('input', function showValue() {
-        var restLabel = document.getElementById('rest-label');
-        restLabel.innerHTML = restRangeInput.value;
+    workInput.addEventListener('input', function() {
+        timer.innerHTML = workInput.value;
+        document.querySelector('label[for=' + workInput.id + ']').innerHTML = workInput.value;
+        //pomodoro.workTime = workInput.value;
+        console.log(workInput.value + 'value');
+    });
+
+    restInput.addEventListener('input', function() {
+        document.querySelector('label[for=' + restInput.id + ']').innerHTML = restInput.value;
+        //pomodoro.restTime = restInput.value;
     });
 
     setInterval(function() {
-        //console.log(m > 0);
-        if (timerType === 'p') {
-            remainingTime.subtract(1, 's');
-            timer.innerHTML = remainingTime.get('minutes') + ':' + remainingTime.get('seconds');
-            remainingTimeBar.style.width = ruleOfThree(mainTimer, remainingTime) + '%';
-            console.log(mainTimer * 60 * 1000 + ' ' + remainingTime);
-            if (remainingTime.get('minutes') === 0 && remainingTime.get('seconds') === 0) {
-                console.log('Acabouz o principal');
-                console.log(remainingTime === 0);
-                alert('Cabou o tempo');
-                timerType = 'r';
-                //mainTimer.stop();
-            }
-        } else if (timerType === 'r') {
-            remainingTime.subtract(1, 's');
-            remainingTime = moment.duration(restTimer, 'minutes');
-            timer.innerHTML = remainingTime.get('minutes') + ':' + remainingTime.get('seconds');
-            if (remainingTime.get('minutes') === 0 && remainingTime.get('seconds') === 0) {
-                console.log('Acabouz o descanso');
-                console.log(remainingTime === 0);
-                alert('Cabou o tempo');
-                //timerType = 'p';
-                //mainTimer.stop();
-            }
-        }
-
+        Update(pomodoro);
     }, 1000);
+
 });
