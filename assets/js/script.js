@@ -6,7 +6,14 @@ window.addEventListener('DOMContentLoaded', function() {
         this.Timer = moment.duration(30, 's');
         //1o pro trabalho, segundo pro descanso.
         this.timerRounds = 2;
-        this.set = false;
+        this.start = false;
+
+        this.setTimer = function(time) {
+            if (pomodoro.set === false) {
+                pomodoro.Timer.add(time, 'm');
+            }
+            return this.Timer.add(time, 'm');
+        }
 
         this.getMinutes = function() {
             console.log(this.Timer);
@@ -24,12 +31,6 @@ window.addEventListener('DOMContentLoaded', function() {
 
     }
 
-    function setTimer(pomodoro, time) {
-        if (pomodoro.set === false) {
-            pomodoro.Timer.add(time, 'm');
-        }
-        return this.Timer.add(time, 'm');
-    }
 
     function Update(pomodoro) {
         //console.log('not updating' + pomodoro.Timer + 'timer he');
