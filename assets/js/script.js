@@ -37,12 +37,13 @@ window.addEventListener('DOMContentLoaded', function() {
             pomodoro.Timer.subtract(1, 's');
             timer.innerHTML = pomodoro.getMinutes() + ':' + pomodoro.getSeconds();
             remainingTimeBar.style.width = pomodoro.ruleOfThree((pomodoro.timerRounds === 2 ? pomodoro.workTime : pomodoro.restTime), pomodoro.Timer) + '%';
-            if (pomodoro.Timer === 0) {
-                alert('Acabou o tempo');
-                pomodoro.setTimer(pomodoro.restTime);
-                pomodoro.timerRounds--;
-            }
-        } else {
+
+        } else if (pomodoro.Timer === 0) {
+            alert('Acabou o tempo');
+            pomodoro.setTimer(pomodoro.restTime);
+            pomodoro.timerRounds--;
+        }
+        if (pomodoro.timerRounds === 0) {
             pomodoro.start = false;
         }
     }
