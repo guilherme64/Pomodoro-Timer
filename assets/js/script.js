@@ -29,22 +29,40 @@ window.addEventListener('DOMContentLoaded', function() {
 
     }
 
-
     function Update(pomodoro) {
         console.log('not updating' + pomodoro.Timer + 'timer he');
-        if (pomodoro.Timer > 0 && pomodoro.timerRounds > 0 && pomodoro.start === true) {
-            console.log('up');
-            pomodoro.Timer.subtract(1, 's');
-            timer.innerHTML = pomodoro.getMinutes() + ':' + pomodoro.getSeconds();
-            remainingTimeBar.style.width = pomodoro.ruleOfThree((pomodoro.timerRounds === 2 ? pomodoro.workTime : pomodoro.restTime), pomodoro.Timer) + '%';
+        /**
+         * O que fazer aqui:
+         * Se o contador de voltas > 0 e o timer > 0:
+         *  Subtrai um segundo
+         *  Muda o mostrador 
+         *  altera a barra
+         * 
+         * Se timer == 0:
+         *  Contador de voltas--
+         *  Se o contador for igual a 1:
+         *  alert
+         *  setTimer com rest
+         * Else: start = false
+         */
 
-        } else if (pomodoro.Timer === 0) {
-            alert('Acabou o tempo');
-            pomodoro.setTimer(pomodoro.restTime);
-            pomodoro.timerRounds--;
-        }
-        if (pomodoro.timerRounds === 0) {
-            pomodoro.start = false;
+        if (pomodoro.start === true) {
+            if (pomodoro.Timer > 0) {
+                if (pomodoro.timerRounds > 0) {
+                    console.log('up');
+                    pomodoro.Timer.subtract(1, 's');
+                    timer.innerHTML = pomodoro.getMinutes() + ':' + pomodoro.getSeconds();
+                    remainingTimeBar.style.width = pomodoro.ruleOfThree((pomodoro.timerRounds === 2 ? pomodoro.workTime : pomodoro.restTime), pomodoro.Timer) + '%';
+                }
+            } else if (pomodoro.timerRounds === 2) {
+                pomodoro.timerRounds--;
+                pomodoro.setTimer(pomodoro.restTime);
+                alert('Vai descansar!');
+            } else {
+                alert('Vai Trabalhar!');
+                pomodoro.start = false;
+                remainingTimeBar.style.width = '100%';
+            }
         }
     }
 
@@ -70,13 +88,10 @@ window.addEventListener('DOMContentLoaded', function() {
     workInput.addEventListener('input', function() {
         timer.innerHTML = workInput.value;
         document.querySelector('label[for=' + workInput.id + ']').innerHTML = workInput.value;
-        //pomodoro.workTime = workInput.value;
-        console.log(workInput.value + 'value');
     });
 
     restInput.addEventListener('input', function() {
         document.querySelector('label[for=' + restInput.id + ']').innerHTML = restInput.value;
-        //pomodoro.restTime = restInput.value;
     });
 
     setInterval(function() {
