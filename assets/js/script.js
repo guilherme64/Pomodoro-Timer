@@ -10,27 +10,28 @@ window.addEventListener('DOMContentLoaded', function() {
 
         this.setTimer = function(time) {
             this.start = true;
-            return this.Timer.add(parseInt(time), 'minutes');
+            this.Timer = moment.duration(parseInt(time), 'minutes');
+            return this.Timer;
+            //return this.Timer.add(parseInt(time), 'minutes');
         }
 
         this.getMinutes = function() {
-            console.log(this.Timer);
             return this.Timer.get('minutes');
         }
 
         this.getSeconds = function() {
-            console.log(this.Timer);
             return this.Timer.get('seconds');
         }
 
         this.ruleOfThree = function(maxValue, curValue) {
+            console.log(curValue + ' <-Cur Max-> ' + maxValue);
+            console.log(' resultado da regra de 3 ' + (100 * curValue) / (maxValue * 60 * 1000));
             return (100 * curValue) / (maxValue * 60 * 1000);
         }
 
     }
 
     function Update(pomodoro) {
-        console.log('not updating' + pomodoro.Timer + 'timer he');
         /**
          * O que fazer aqui:
          * Se o contador de voltas > 0 e o timer > 0:
@@ -45,11 +46,11 @@ window.addEventListener('DOMContentLoaded', function() {
          *  setTimer com rest
          * Else: start = false
          */
-
+        console.log(pomodoro.workTime + ' <-W T-> ' + pomodoro.restTime);
+        console.log(pomodoro.Timer + ' <-Timer Work -> ' + pomodoro.workTime);
         if (pomodoro.start === true) {
             if (pomodoro.Timer > 0) {
                 if (pomodoro.timerRounds > 0) {
-                    console.log('up');
                     pomodoro.Timer.subtract(1, 's');
                     timer.innerHTML = pomodoro.getMinutes() + ':' + pomodoro.getSeconds();
                     remainingTimeBar.style.width = pomodoro.ruleOfThree((pomodoro.timerRounds === 2 ? pomodoro.workTime : pomodoro.restTime), pomodoro.Timer) + '%';
@@ -76,12 +77,12 @@ window.addEventListener('DOMContentLoaded', function() {
 
     startBtn.addEventListener('click', function() {
         if (pomodoro.start === false) {
-            pomodoro.workTime = workInput.value;
-            pomodoro.restTime = restInput.value;
+            /**
+             Não é o ideal, mas a cada reinício, acabou ficando mais fácil reiniciar
+             o pomodoro
+             */
+            pomodoro = new Pomodoro(workInput.value, restInput.value);
             pomodoro.setTimer(pomodoro.workTime);
-            console.log(pomodoro.workTime);
-            console.log(pomodoro.restTime);
-            console.log(pomodoro.Timer + 'pomo');
         }
     });
 
