@@ -52,19 +52,21 @@ body {
 .form__group {
     padding-top: 50px;
     padding-bottom: 50px;
+    margin-bottom: 50px;
 }
 
 .form__group--float {
-    width: 40%;
-    padding: 50px;
+    width: 48%;
 }
 
 .right {
     float: right;
+    margin-left: 1%;
 }
 
 .left {
     float: left;
+    margin-right: 1%;
 }
 
 .form__h2 {
@@ -77,4 +79,16 @@ body {
     text-align: center;
     font-size: 1.5em;
     font-family: 'Work Sans', sans-serif;
+}
+
+.confirm__btn {
+    display: block;
+    clear: both;
+    margin: 120px auto;
+    width: 150px;
+    height: 2.5em;
+    border-radius: 2px;
+    background: white;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 1.5em;
 }
