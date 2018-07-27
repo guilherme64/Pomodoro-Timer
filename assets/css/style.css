@@ -48,3 +48,33 @@ body {
     width: 100%;
     background-color: #f46464;
 }
+
+.form__group {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.form__group--float {
+    width: 40%;
+    padding: 50px;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.form__h2 {
+    font-family: 'Work Sans', sans-serif;
+    text-align: center;
+}
+
+.form__label {
+    display: block;
+    text-align: center;
+    font-size: 1.5em;
+    font-family: 'Work Sans', sans-serif;
+}

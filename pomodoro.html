@@ -25,15 +25,17 @@
         </div>
 
 
-        <form>
-            <h2>Work</h2>
-            <label for="main-input" id="main-label">30</label>
-            <input class='main__slider' type="range" min="1" max="60" id='main-input' step="1" value="30" />
-        </form>
-        <form>
-            <h2>Rest</h2>
-            <label for="rest-input" id='rest-label'>12</label>
-            <input class="main__slider" type="range" min="1" max="25" id='rest-input' step="1" value="12" />
+        <form class="form__group">
+            <div class='form__group--float left'>
+                <h2 class="form__h2">Work time</h2>
+                <label class="form__label" for="main-input" id="main-label">30</label>
+                <input class='main__slider' type="range" min="1" max="60" id='main-input' step="1" value="30" />
+            </div>
+            <div class='form__group--float right'>
+                <h2 class="form__h2">Rest time</h2>
+                <label class="form__label" for="rest-input" id='rest-label'>12</label>
+                <input class="main__slider" type="range" min="1" max="25" id='rest-input' step="1" value="12" />
+            </div>
         </form>
         <button id="start-btn">Start</button>
     </main>

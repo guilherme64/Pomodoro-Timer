@@ -2,7 +2,8 @@
 
 input[type=range].main__slider {
     -webkit-appearance: none;
-    width: 100%;
+    width: 90%;
+    float: right;
     margin: -0.5px 0;
 }
 
