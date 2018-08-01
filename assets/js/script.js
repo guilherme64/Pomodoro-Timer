@@ -7,6 +7,7 @@ window.addEventListener('DOMContentLoaded', function() {
         //1o pro trabalho, segundo pro descanso.
         this.timerRounds = 2;
         this.start = false;
+        this.stop = false;
 
         this.setTimer = function(time) {
             this.start = true;
@@ -48,7 +49,7 @@ window.addEventListener('DOMContentLoaded', function() {
          */
         console.log(pomodoro.workTime + ' <-W T-> ' + pomodoro.restTime);
         console.log(pomodoro.Timer + ' <-Timer Work -> ' + pomodoro.workTime);
-        if (pomodoro.start === true) {
+        if (pomodoro.start === true && pomodoro.stop === false) {
             if (pomodoro.Timer > 0) {
                 if (pomodoro.timerRounds > 0) {
                     pomodoro.Timer.subtract(1, 's');
@@ -69,6 +70,7 @@ window.addEventListener('DOMContentLoaded', function() {
     }
 
     var startBtn = document.getElementById('start-btn');
+    var stopBtn = document.getElementById('stop-btn');
     var timer = document.getElementById('timer');
     var workInput = document.getElementById('main-input');
     var restInput = document.getElementById('rest-input');
@@ -83,7 +85,14 @@ window.addEventListener('DOMContentLoaded', function() {
              */
             pomodoro = new Pomodoro(workInput.value, restInput.value);
             pomodoro.setTimer(pomodoro.workTime);
+        } else if (pomodoro.stop === true) {
+            pomodoro.stop = false;
         }
+    });
+
+    stopBtn.addEventListener('click', function() {
+        pomodoro.stop = true;
+
     });
 
     workInput.addEventListener('input', function() {
