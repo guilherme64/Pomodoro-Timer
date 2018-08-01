@@ -54,6 +54,7 @@ window.addEventListener('DOMContentLoaded', function() {
                     pomodoro.Timer.subtract(1, 's');
                     timer.innerHTML = pomodoro.getMinutes() + ':' + pomodoro.getSeconds();
                     remainingTimeBar.style.width = pomodoro.ruleOfThree((pomodoro.timerRounds === 2 ? pomodoro.workTime : pomodoro.restTime), pomodoro.Timer) + '%';
+                    document.title = pomodoro.getMinutes() + ':' + pomodoro.getSeconds() + ' Pomodoro';
                 }
             } else if (pomodoro.timerRounds === 2) {
                 pomodoro.timerRounds--;
@@ -72,7 +73,6 @@ window.addEventListener('DOMContentLoaded', function() {
     var workInput = document.getElementById('main-input');
     var restInput = document.getElementById('rest-input');
     var remainingTimeBar = document.getElementById('bar-green');
-
     var pomodoro = new Pomodoro(workInput.value, restInput.value);
 
     startBtn.addEventListener('click', function() {
