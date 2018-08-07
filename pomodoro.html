@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>Pomodoro Timer</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/range.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
@@ -29,7 +30,7 @@
             <div class='form__group--float left'>
                 <h2 class="form__h2">Work time</h2>
                 <label class="form__label" for="main-input" id="main-label">30</label>
-                <input class='main__slider' type="range" min="" max="60" id='main-input' step="1" value="30" />
+                <input class='main__slider' type="range" min="10" max="60" id='main-input' step="1" value="35" />
             </div>
             <div class='form__group--float right'>
                 <h2 class="form__h2">Rest time</h2>
@@ -38,12 +39,13 @@
             </div>
         </form>
         <div class='btn-group'>
-            <button class='btn-group__btn' id="start-btn">Start</button>
-            <button class='btn-group__btn' id="stop-btn">Stop</button>
+            <button class='btn-group__btn' id="start-btn"><i class="fas fa-play"></i></button>
+            <button class='btn-group__btn' id="stop-btn"><i class="fas fa-pause"></i></button>
         </div>
 
     </main>
-    <a href="www.guilhermemelo.com">Me</a>
+    <footer>Project made by <a href="www.guilhermemelo.com">Guilherme Melo</a></footer>
+
     <script src="assets/js/HackTimerWorker.min.js"></script>
     <script src="assets/js/moment.js"></script>
     <script src="assets/js/script.js"></script>
