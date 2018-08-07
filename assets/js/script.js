@@ -1,11 +1,12 @@
 window.addEventListener('DOMContentLoaded', function() {
-    function Pomodoro(workTime, restTime) {
+    function Pomodoro(time) {
 
-        this.workTime = workTime;
-        this.restTime = restTime;
+        //this.workTime = workTime;
+        //this.restTime = restTime;
+        this.time = time;
         this.Timer = moment.duration();
         //1o pro trabalho, segundo pro descanso.
-        this.timerRounds = 2;
+        //this.timerRounds = 2;
         this.start = false;
         this.stop = false;
 
@@ -51,17 +52,19 @@ window.addEventListener('DOMContentLoaded', function() {
         console.log(pomodoro.Timer + ' <-Timer Work -> ' + pomodoro.workTime);
         if (pomodoro.start === true && pomodoro.stop === false) {
             if (pomodoro.Timer > 0) {
-                if (pomodoro.timerRounds > 0) {
-                    pomodoro.Timer.subtract(1, 's');
-                    timer.innerHTML = pomodoro.getMinutes() + ':' + pomodoro.getSeconds();
-                    remainingTimeBar.style.width = pomodoro.ruleOfThree((pomodoro.timerRounds === 2 ? pomodoro.workTime : pomodoro.restTime), pomodoro.Timer) + '%';
-                    document.title = pomodoro.getMinutes() + ':' + pomodoro.getSeconds() + ' Pomodoro';
-                }
-            } else if (pomodoro.timerRounds === 2) {
-                pomodoro.timerRounds--;
-                pomodoro.setTimer(pomodoro.restTime);
-                alert('Vai descansar!');
-            } else {
+                //if (pomodoro.timerRounds > 0) {
+                pomodoro.Timer.subtract(1, 's');
+                timer.innerHTML = pomodoro.getMinutes() + ':' + pomodoro.getSeconds();
+                remainingTimeBar.style.width = pomodoro.ruleOfThree((pomodoro.timerRounds === 2 ? pomodoro.workTime : pomodoro.restTime), pomodoro.Timer) + '%';
+                document.title = pomodoro.getMinutes() + ':' + pomodoro.getSeconds() + ' Pomodoro';
+                //}
+            }
+            /*else if (pomodoro.timerRounds === 2) {
+                           pomodoro.timerRounds--;
+                           pomodoro.setTimer(pomodoro.restTime);
+                           alert('Vai descansar!');
+                       }*/
+            else {
                 alert('Vai Trabalhar!');
                 pomodoro.start = false;
                 remainingTimeBar.style.width = '100%';
@@ -75,7 +78,7 @@ window.addEventListener('DOMContentLoaded', function() {
     var workInput = document.getElementById('main-input');
     var restInput = document.getElementById('rest-input');
     var remainingTimeBar = document.getElementById('bar-green');
-    var pomodoro = new Pomodoro(workInput.value, restInput.value);
+    var pomodoro = new Pomodoro(workInput.value);
 
     startBtn.addEventListener('click', function() {
         if (pomodoro.start === false) {
@@ -83,8 +86,8 @@ window.addEventListener('DOMContentLoaded', function() {
              Não é o ideal, mas a cada reinício, acabou ficando mais fácil reiniciar
              o pomodoro
              */
-            pomodoro = new Pomodoro(workInput.value, restInput.value);
-            pomodoro.setTimer(pomodoro.workTime);
+            pomodoro = new Pomodoro(timer.innerHTML);
+            pomodoro.setTimer(pomodoro.time);
         } else if (pomodoro.stop === true) {
             pomodoro.stop = false;
         }
@@ -96,11 +99,12 @@ window.addEventListener('DOMContentLoaded', function() {
     });
 
     workInput.addEventListener('input', function() {
-        timer.innerHTML = workInput.value;
+        if (pomodoro.start === false) timer.innerHTML = workInput.value;
         document.querySelector('label[for=' + workInput.id + ']').innerHTML = workInput.value;
     });
 
     restInput.addEventListener('input', function() {
+        if (pomodoro.start === false) timer.innerHTML = restInput.value;
         document.querySelector('label[for=' + restInput.id + ']').innerHTML = restInput.value;
     });
 
