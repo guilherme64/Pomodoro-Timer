@@ -55,7 +55,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 //if (pomodoro.timerRounds > 0) {
                 pomodoro.Timer.subtract(1, 's');
                 timer.innerHTML = pomodoro.getMinutes() + ':' + pomodoro.getSeconds();
-                remainingTimeBar.style.width = pomodoro.ruleOfThree((pomodoro.timerRounds === 2 ? pomodoro.workTime : pomodoro.restTime), pomodoro.Timer) + '%';
+                remainingTimeBar.style.width = pomodoro.ruleOfThree(pomodoro.time, pomodoro.Timer) + '%';
                 document.title = pomodoro.getMinutes() + ':' + pomodoro.getSeconds() + ' Pomodoro';
                 //}
             }
@@ -99,12 +99,20 @@ window.addEventListener('DOMContentLoaded', function() {
     });
 
     workInput.addEventListener('input', function() {
-        if (pomodoro.start === false) timer.innerHTML = workInput.value;
+        if (pomodoro.start === false) {
+            timer.innerHTML = workInput.value;
+            workInput.style.background = 'rgba(0, 255, 138,0.3)';
+            restInput.style.background = 'white';
+        }
         document.querySelector('label[for=' + workInput.id + ']').innerHTML = workInput.value;
     });
 
     restInput.addEventListener('input', function() {
-        if (pomodoro.start === false) timer.innerHTML = restInput.value;
+        if (pomodoro.start === false) {
+            timer.innerHTML = restInput.value;
+            restInput.style.background = 'rgba(0, 255, 138,0.3)';
+            workInput.style.background = 'white';
+        }
         document.querySelector('label[for=' + restInput.id + ']').innerHTML = restInput.value;
     });
 
